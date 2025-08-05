@@ -47,7 +47,8 @@ console.log(null === undefined);   // false
 console.log([] == false);          // true (confusing!)
 
 // console.log([] === false);         // false
-// the above code is giving alert because it compares different types so it is false
+// giving error bcoz one is object and other is boolean
+// now object converted to booleann but one is true and other is false
 console.log(Boolean([]) === false); // false (explicit conversion for clarity)
 
 // Object conversions
