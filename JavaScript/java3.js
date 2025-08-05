@@ -45,7 +45,10 @@ console.log(0 === "0");            // false
 console.log(null == undefined);    // true
 console.log(null === undefined);   // false
 console.log([] == false);          // true (confusing!)
-console.log([] === false);         // false
+
+// console.log([] === false);         // false
+// the above code is giving alert because it compares different types so it is false
+console.log(Boolean([]) === false); // false (explicit conversion for clarity)
 
 // Object conversions
 console.log([1,2] + [3,4]);        // "1,23,4" (arrays to strings)
