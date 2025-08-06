@@ -77,6 +77,22 @@ Runs as soon as it is defined.
 /*
 ## 10. Closures
 Functions remember variables from their scope.
+A closure is a function that remembers the variables from its lexical scope, even after the outer function has finished executing.
+1. makeCounter() is a function that returns another function.
+Inside it, a local variable count is initialized to 0.
+
+2. It returns an inner function, which:
+Increments count
+
+Returns the updated value
+
+3. When you do:
+const counter = makeCounter();
+You're calling makeCounter(), which returns the inner function.
+
+The returned function is saved in the variable counter.
+
+Here's the magic: count remains accessible to counter(), even though makeCounter() has finished running — this is called a closure.
 */
 function makeCounter() {
     let count = 0;
