@@ -1,0 +1,138 @@
+<!-- Class 1 -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Events</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <!-- Multiple images with different IDs -->
+            <li><img width="200px" id="photoshop" src="..." alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="..." alt="japan"></li>
+            <li><img width="200px" id="river" src="..." alt="river"></li>
+            <li><img width="200px" id="owl" src="..." alt="owl"></li>
+            <li><img width="200px" id="prayer" src="..." alt="prayer"></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    // Using the old onclick property method (not recommended)
+    document.getElementById('owl').onclick = function() {
+        alert("owl clicked");
+    }
+
+    //  Modern approach: Using addEventListener
+    // This fires when any part inside the UL is clicked
+    document.getElementById('images').addEventListener('click', function(e) {
+        console.log("clicked inside the ul");
+    }, false);
+
+    // Adding event listener to owl specifically
+    document.getElementById('owl').addEventListener('click', function(e) {
+        console.log("owl clicked");
+        e.stopPropagation();  // Prevents the event from bubbling to parent elements
+    }, false);
+
+    // Google link - prevent navigation and bubbling
+    document.getElementById('google').addEventListener('click', function(e) {
+        e.preventDefault();      // Stops default anchor behavior (navigation)
+        e.stopPropagation();     // Stops bubbling
+        console.log("google clicked");
+    }, false);
+
+    //  Event Delegation: handling all image clicks from the parent UL
+    document.querySelector('#images').addEventListener('click', function(e) {
+        console.log(e.target.tagName); // Logs the tag that was actually clicked
+        if (e.target.tagName === 'IMG') {
+            console.log(e.target.id); // Log image ID
+            let removeIt = e.target.parentNode; // Get the <li> element
+            removeIt.remove(); // Remove the clicked image's <li> element
+        }
+    });
+    // Example of removing an element using parentNode
+    // removeIt.parentNode.removeChild(removeIt)
+</script>
+</html>
+
+
+
+<!-- //Checkout prop:
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY
+    // altkey, ctrlkey, shiftkey, keyCode -->
+
+  
+
+
+<!-- Class 2   -->
+
+<!-- Class 2 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout Example</title>
+</head>
+<body>
+    <h1>Chai aur code</h1>
+    <button id="stop">Stop</button>
+</body>
+
+<script>
+    const sayHitesh = function() {
+        console.log("Hitesh");
+    }
+
+    const changeText = function() {
+        document.querySelector('h1').innerHTML = "best JS series";
+    }
+
+    //  Run `changeText` function after 2 seconds
+    const changeMe = setTimeout(changeText, 2000);
+
+    //  Clicking this button will cancel the above timeout
+    document.querySelector('#stop').addEventListener('click', function() {
+        clearTimeout(changeMe); // Stops the changeText from running
+        console.log("STOPPED");
+    });
+</script>
+</html>
+
+
+<!-- Class 3 -->
+<!-- Class 3 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setInterval Example</title>
+</head>
+<body>
+    <h1>Chai aur Javascript</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+
+<script>
+    const sayDate = function(str) {
+        console.log(str, Date.now()); // Logs "hi" and current timestamp
+    }
+
+    //  Start interval to run sayDate every 1 second with "hi"
+    const intervalId = setInterval(sayDate, 1000, "hi");
+
+    //  This clears the interval immediately (auto-stop — you can place inside a button to control manually)
+    clearInterval(intervalId);
+</script>
+</html>
